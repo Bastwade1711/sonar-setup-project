@@ -9,7 +9,7 @@ on:
       - main
 
 jobs:
-  deploy:
+  sonar:
     runs-on: ubuntu-latest
 
     steps:
@@ -20,10 +20,14 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: 'npm'
 
       - name: Install dependencies
         run: npm ci
 
       - name: Build Angular app
         run: npm run build -- --configuration=production
+
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarqube-scan-action@v2
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_KEY }}
