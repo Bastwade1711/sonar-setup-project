@@ -85,7 +85,7 @@ export class App {
   }
   
   // Issue 9: Magic numbers and no type safety
-  calculate(a, b) {
+  calculate(a: any, b: any) {
     return a * b / 2 + 15 - 7;
   }
   
